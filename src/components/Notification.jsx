@@ -43,6 +43,7 @@ const Notification = () => {
 
   const unreadCount = allNotifications.filter((n) => !n.read).length;
 
+  // Filter for unread and all
   const filteredNotifications =
     activeTab === "unread"
       ? allNotifications.filter((n) => !n.read)
@@ -50,6 +51,7 @@ const Notification = () => {
 
   return (
     <div className="relative">
+      {/* Notifications Navbar */}
       <nav className="sticky top-0 bg-white shadow p-4 flex justify-between items-center">
         <h1 className="text-xl font-bold">My App</h1>
         <button
@@ -64,9 +66,9 @@ const Notification = () => {
           )}
         </button>
       </nav>
-      {getLoading && <p>Loading items...</p>}
-      {getError && <p className="text-red-500">Error: {getError}</p>}
-      {isOpen && (
+
+      {/* Notification Tab  */}
+      {isOpen && !isExpanded && (
         <NotificationDropdown
           onClose={() => setIsOpen(false)}
           onViewAll={() => setIsExpanded((prev) => !prev)}
@@ -74,8 +76,12 @@ const Notification = () => {
           markAsRead={markAsRead}
           onTabChange={setActiveTab}
           activeTab={activeTab}
+          getLoading={getLoading}
+          getError={getError}
         />
       )}
+
+      {/* Notification tab after click view all */}
       {isExpanded && (
         <div className="absolute right-0 mt-2 w-96 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden z-10 max-h-[1000px]">
           <div className="sticky top-0 px-4 py-2 text-gray-700 font-semibold border-b bg-gray-50 flex justify-between items-center">
