@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NotificationItem } from "./ui/NotificationItem";
 import { NotificationDropdown } from "./ui/NotificationDropdown";
 import { useGetAllNotifications } from "../hooks/notificationHooks";
+import { FaBell } from "react-icons/fa"; // Import the notification bell icon
 
 const Notification = () => {
   // hooks
@@ -55,7 +56,7 @@ const Notification = () => {
           onClick={() => setIsOpen((prev) => !prev)}
           className="relative p-2 text-gray-700 hover:text-blue-500"
         >
-          <span className="material-icons">notifications</span>
+          <FaBell />
           {unreadCount > 0 && (
             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1">
               {unreadCount}
